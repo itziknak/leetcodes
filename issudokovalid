@@ -1,0 +1,60 @@
+def isValidSudoku (board):
+    flag=False
+    i=0
+    while (i<len(board) and flag==False):
+        j=0
+        while (j<len(board)and flag==False):
+            if board[i][j]==".":
+                num=1
+                while (num<10 and flag==False):
+                    board[i][j]=str(num)
+                    flag=isValidSudoku(board)
+                    if num==9:
+                        board[i][j]="."
+                    num+=1
+            z=1
+            while (flag==False and z<len(board)-j):
+                if board[i][j]==board[i][j+z]:
+                    return False
+                z+=1
+            z=1
+            while (flag==False and z<len(board)-i):
+                if board[i][j]==board[i+z][j]:
+                    return False
+                z+=1
+            c=3*int(j/3)
+            r=3*int(i/3)
+            z=0
+            while (flag==False and z<3):
+                for k in range(3):
+                    if board[i][j]==board[r+z][c+k] and (r+z)!=i and (c+k)!=j:
+                        return False
+                z+=1
+            j+=1
+        i+=1
+    return True
+   
+
+board=[["8",".",".","2","9",".",".",".","."]
+    ,["4","3","1",".",".",".",".",".","."]
+    ,["2",".",".","7",".",".",".",".","."]
+    ,[".","5",".",".",".",".","2",".","."]
+    ,[".",".","3",".",".",".",".",".","8"]
+    ,[".",".",".","6",".","5",".",".","9"]
+    ,[".","8",".",".","4",".",".","3","."]
+    ,[".",".",".",".","1",".",".",".","."]
+    ,[".",".",".",".",".","2","1","4","."]]
+    
+flag=isValidSudoku(board)
+print (flag)
+
+    
+                    
+
+                    
+
+        
+
+
+        
+        
